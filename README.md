@@ -1,0 +1,2 @@
+# Change-point-analysis-and-statistical-modelling-of-time-series-data---
+This project, developed at Birhan Energies, explores how major events impact Brent crude oil prices over the past decade. By analyzing geopolitical conflicts, OPEC policy shifts, sanctions, and global decisions, it provides data-driven insights to help investors, analysts, and policymakers make informed decisions.  **(340 characters)** ✅
