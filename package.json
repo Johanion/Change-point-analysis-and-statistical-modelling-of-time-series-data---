@@ -4,6 +4,7 @@
   "private": true,
   "description": "Workflow and diagnostics for Brent oil price event and change-point analysis.",
   "scripts": {
-    "diagnostics": "node src/time_series_diagnostics.js"
+    "diagnostics": "node src/time_series_diagnostics.js",
+    "task2:impact": "node src/change_point_event_impact.js"
   }
 }
