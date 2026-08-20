@@ -1,0 +1,5 @@
+pandas>=2.0
+numpy>=1.24
+pymc>=5.0
+arviz>=0.16
+matplotlib>=3.7
