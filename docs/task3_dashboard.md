@@ -46,6 +46,21 @@ Open:
 http://127.0.0.1:5173
 ```
 
+For a production-build preview:
+
+```powershell
+npm.cmd --prefix frontend run build
+npm.cmd --prefix frontend run preview
+```
+
+Open:
+
+```text
+http://127.0.0.1:4173
+```
+
+The production build and preview route were verified in the current workspace. The Vite development optimizer can be sensitive to local Windows filesystem permissions; use the production preview command if `npm.cmd --prefix frontend run dev` hits dependency-optimization access errors.
+
 If the Flask API runs somewhere else, set:
 
 ```powershell
