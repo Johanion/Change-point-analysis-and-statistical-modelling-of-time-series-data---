@@ -23,7 +23,9 @@ Available endpoints:
 - `GET /api/summary`: coverage, latest price, volatility, event count, and change-point count.
 - `GET /api/prices?start=YYYY-MM-DD&end=YYYY-MM-DD&max_points=900`: filtered Brent price series.
 - `GET /api/events?type=All`: event catalogue with 30-trading-day before/after impact metrics.
+- `GET /api/event-type-summary`: average event impact and volatility by event category.
 - `GET /api/change-points`: Task 2 change-point candidates.
+- `GET /api/forecast?horizon=60`: simple drift-based Brent price projection with volatility bands.
 - `GET /api/model-report`: generated Task 2 Markdown report.
 
 ## Frontend
@@ -70,11 +72,14 @@ $env:VITE_API_BASE_URL="http://127.0.0.1:5000"
 ## Dashboard Features
 
 - Historical Brent price chart with event markers and change-point markers.
+- Forecast overlay with uncertainty bands for near-term scenario context.
 - Event-type filter for OPEC policy, sanctions, conflict, and macroeconomic shocks.
 - Date-range controls for focused exploration.
 - Event drilldown with notes, source link, before/after average price, price shift, and volatility shift.
 - Event impact bar chart showing 30-trading-day price changes.
 - Change-point candidate cards with quantified before/after price shifts.
+- Event category comparison cards showing average impact and post-event volatility.
+- Executive insight cards for strongest filtered event, forecast context, and causal interpretation limits.
 - Responsive layout for desktop, tablet, and mobile.
 
 ## Data Sources

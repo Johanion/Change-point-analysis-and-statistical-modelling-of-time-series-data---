@@ -94,7 +94,7 @@ h1 {
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -346,6 +346,78 @@ h1 {
   gap: 10px;
 }
 
+.insight-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.insight-card {
+  min-height: 150px;
+}
+
+.insight-card span,
+.type-card small {
+  color: #667270;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.insight-card h2 {
+  margin-top: 10px;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.insight-card p {
+  margin-top: 10px;
+  color: #4e5b59;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.type-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.type-card {
+  position: relative;
+  min-height: 132px;
+  border: 1px solid #dde4e5;
+  border-radius: 6px;
+  padding: 14px 14px 12px 18px;
+  background: #fbfcfc;
+}
+
+.type-card > span {
+  position: absolute;
+  inset: 14px auto 14px 0;
+  width: 5px;
+  border-radius: 0 4px 4px 0;
+}
+
+.type-card h3 {
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.type-card strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.45rem;
+}
+
+.type-card small {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.35;
+  text-transform: none;
+}
+
 .change-card {
   min-height: 156px;
   border: 1px solid #dde4e5;
@@ -386,8 +458,13 @@ h1 {
 
 @media (max-width: 1100px) {
   .metrics-grid,
-  .change-grid {
+  .change-grid,
+  .type-summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .insight-strip {
+    grid-template-columns: 1fr;
   }
 
   .dashboard-grid,
@@ -418,7 +495,8 @@ h1 {
   }
 
   .metrics-grid,
-  .change-grid {
+  .change-grid,
+  .type-summary-grid {
     grid-template-columns: 1fr;
   }
 

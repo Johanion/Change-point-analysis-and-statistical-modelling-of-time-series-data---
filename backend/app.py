@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 import math
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from statistics import mean, stdev
 
@@ -125,6 +125,54 @@ def downsample(rows: list[dict], max_points: int) -> list[dict]:
     return rows[::step]
 
 
+def rolling_average(values: list[float], window: int) -> float:
+    if not values:
+        return 0.0
+    return mean(values[-window:]) if len(values) >= window else mean(values)
+
+
+def generate_forecast(prices: list[dict], horizon: int = 60) -> list[dict]:
+    recent_returns = [row["log_return"] for row in prices[-252:] if row["log_return"] is not None]
+    drift = rolling_average(recent_returns, 60)
+    volatility = stdev(recent_returns) if len(recent_returns) > 1 else 0.0
+    last_price = prices[-1]["price"]
+    current_date = prices[-1]["date"]
+    forecast = []
+
+    for step in range(1, horizon + 1):
+        current_date += timedelta(days=1)
+        expected_price = last_price * math.exp(drift * step)
+        uncertainty = volatility * math.sqrt(step)
+        forecast.append(
+            {
+                "date": current_date.date().isoformat(),
+                "forecast_price": round(expected_price, 2),
+                "lower_price": round(expected_price * math.exp(-1.96 * uncertainty), 2),
+                "upper_price": round(expected_price * math.exp(1.96 * uncertainty), 2),
+                "method": "60-day drift with 252-day volatility band",
+            }
+        )
+
+    return forecast
+
+
+def event_type_summary(prices: list[dict], events: list[dict]) -> list[dict]:
+    impacts = [event_impact(prices, event) for event in events]
+    grouped: dict[str, list[dict]] = {}
+    for impact in impacts:
+        grouped.setdefault(impact["event_type"], []).append(impact)
+
+    return [
+        {
+            "event_type": event_type,
+            "event_count": len(items),
+            "average_price_change_pct": round(mean(item["price_change_pct"] for item in items), 2),
+            "average_volatility_after_pct": round(mean(item["volatility_after_pct"] for item in items), 2),
+        }
+        for event_type, items in sorted(grouped.items())
+    ]
+
+
 def create_app() -> Flask:
     app = Flask(__name__)
     CORS(app)
@@ -187,9 +235,20 @@ def create_app() -> Flask:
         prices = load_prices()
         return jsonify([event_impact(prices, event) for event in events_data])
 
+    @app.get("/api/event-type-summary")
+    def event_types():
+        prices = load_prices()
+        return jsonify(event_type_summary(prices, load_events()))
+
     @app.get("/api/change-points")
     def change_points():
         return jsonify(load_change_points())
+
+    @app.get("/api/forecast")
+    def forecast():
+        horizon = int(request.args.get("horizon", 60))
+        horizon = max(7, min(horizon, 180))
+        return jsonify(generate_forecast(load_prices(), horizon))
 
     @app.get("/api/model-report")
     def model_report():
