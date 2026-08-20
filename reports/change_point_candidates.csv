@@ -1,0 +1,7 @@
+"rank","change_date","associated_event","event_date","event_type","days_from_event","mean_price_30d_before","mean_price_30d_after","price_change_pct","return_vol_30d_before_pct","return_vol_30d_after_pct","improvement_pct"
+"1","2014-11-13","OPEC maintains 30 million bpd output ceiling","2014-11-27","OPEC policy","-14","85.86","68.42","-20.31","1.39","1.92","39.34"
+"2","2017-09-20","No close curated event","2017-05-25","OPEC policy","118","52.99","57.73","8.95","1.24","1.38","50.12"
+"3","2020-03-06","WHO characterizes COVID-19 as a pandemic","2020-03-11","Macroeconomic shock","-5","55.80","25.11","-55.00","2.46","12.54","13.56"
+"4","2020-11-24","No close curated event","2020-04-12","OPEC policy","226","40.77","49.71","21.91","2.71","1.71","52.39"
+"5","2021-06-01","OPEC+ agrees monthly production increases","2021-07-18","OPEC policy","-47","67.66","74.04","9.44","1.62","1.26","39.46"
+"6","2022-01-25","Russia launches full-scale invasion of Ukraine","2022-02-24","Conflict","-30","80.31","99.86","24.35","1.82","2.92","72.66"
