@@ -5,6 +5,9 @@
   "description": "Workflow and diagnostics for Brent oil price event and change-point analysis.",
   "scripts": {
     "diagnostics": "node src/time_series_diagnostics.js",
-    "task2:impact": "node src/change_point_event_impact.js"
+    "task2:impact": "node src/change_point_event_impact.js",
+    "dashboard:api": "flask --app backend.app run --host 127.0.0.1 --port 5000",
+    "dashboard:web": "npm.cmd --prefix frontend run dev",
+    "dashboard:build": "npm.cmd --prefix frontend run build"
   }
 }
